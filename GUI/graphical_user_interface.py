@@ -1,5 +1,7 @@
 from cgitb import text
 from tkinter import *
+from tkinter.scrolledtext import ScrolledText
+from turtle import width
 from PIL import ImageTk, Image
 import os
 
@@ -54,9 +56,9 @@ modeSingle_img = ImageTk.PhotoImage(Image.open(assetsPath + '/mode_cycle.png').r
 eStop_img = ImageTk.PhotoImage(Image.open(
     assetsPath + '/e-stop.png').resize((200, 200), Image.ANTIALIAS))
 arrowUp_img = ImageTk.PhotoImage(Image.open(
-    assetsPath + '/up_arrow.png').resize((arrowResizeX, arrowResizeY), Image.ANTIALIAS))
+    assetsPath + '/up_arrow.png').resize((int(arrowResizeX/2), int(arrowResizeY/2)), Image.ANTIALIAS))
 arrowDown_img = ImageTk.PhotoImage(Image.open(
-    assetsPath + '/down_arrow.png').resize((arrowResizeX, arrowResizeY), Image.ANTIALIAS))
+    assetsPath + '/down_arrow.png').resize((int(arrowResizeX/2), int(arrowResizeY/2)), Image.ANTIALIAS))
 play_img = ImageTk.PhotoImage(Image.open(assetsPath + '/play_button.png').resize(
     (squareButtonResize, squareButtonResize), Image.ANTIALIAS))
 pause_img = ImageTk.PhotoImage(Image.open(assetsPath + '/pause_button.png').resize(
@@ -111,6 +113,8 @@ spindle_lbl = Label(root, text="Spindle =", font=fontSecondaire)
 overwrite_lbl = Label(root, text="Overwrite =", font=fontSecondaire)
 overwrite1_lbl = Label(root, text="Overwrite :", font=fontPrincipal)
 
+gcodeVisual_sct = ScrolledText(root, width=50, height=30, font=fontSecondaire, bd=5, state="disable")
+
 jogXup_btn.place(x=120, y=0)
 jogXdown_btn.place(x=120, y=210)
 jogYup_btn.place(x=0, y=120)
@@ -150,7 +154,9 @@ overwrite1_lbl.place(x=700, y=300)
 arrowUp_btn.place(x=750, y=350)
 arrowDown_btn.place(x=750, y=415)
 
-eStop_btn.place(x=900, y=525)
+# eStop_btn.place(x=900, y=525)
+
+gcodeVisual_sct.place(x=1300, y=0)
 
 
 root.mainloop()
