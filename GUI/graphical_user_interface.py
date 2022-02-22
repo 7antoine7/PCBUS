@@ -1,7 +1,6 @@
 from cgitb import text
 from tkinter import *
 from tkinter.scrolledtext import ScrolledText
-from turtle import width
 from PIL import ImageTk, Image
 import os
 
@@ -10,9 +9,9 @@ directoryPath = os.path.dirname(__file__)
 assetsPath = os.path.abspath(os.path.join(
     os.path.join(directoryPath, os.pardir), "assets"))
 
-
 root = Tk()
 root.title("PCBUS")
+root.iconbitmap(assetsPath + '/logo_PCBUS.ico')
 root.geometry("1920x1080")
 
 incrementXY_list = ["0.1 mm", "1 mm", "10 mm"]
@@ -113,12 +112,12 @@ spindle_lbl = Label(root, text="Spindle =", font=fontSecondaire)
 overwrite_lbl = Label(root, text="Overwrite =", font=fontSecondaire)
 overwrite1_lbl = Label(root, text="Overwrite :", font=fontPrincipal)
 
-gcodeVisual_sct = ScrolledText(root, width=50, height=30, font=fontSecondaire, bd=5, state="disable")
+gcodeVisual_sct = ScrolledText(root, width=40, height=30, font=fontSecondaire, bd=5, state="disable")
 
 jogXup_btn.place(x=120, y=0)
 jogXdown_btn.place(x=120, y=210)
 jogYup_btn.place(x=0, y=120)
-jogYdown_btn.place(x=210, y=110)
+jogYdown_btn.place(x=210, y=120)
 jogZup_btn.place(x=345, y=0)
 jogZdown_btn.place(x=345, y=210)
 homeXY_btn.place(x=120, y=120)
@@ -156,7 +155,7 @@ arrowDown_btn.place(x=750, y=415)
 
 # eStop_btn.place(x=900, y=525)
 
-gcodeVisual_sct.place(x=1300, y=0)
+gcodeVisual_sct.place(x=1050, y=0)
 
 
 root.mainloop()
