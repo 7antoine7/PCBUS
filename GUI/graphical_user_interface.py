@@ -1,6 +1,7 @@
 from cgitb import text
 from tkinter import *
 from tkinter.scrolledtext import ScrolledText
+from turtle import bgcolor
 from PIL import ImageTk, Image
 import os
 
@@ -86,6 +87,7 @@ arrowDown_btn = Button(root, image=arrowDown_img, borderwidth=bdwith)
 play_btn = Button(root, image=play_img, borderwidth=bdwith)
 pause_btn = Button(root, image=pause_img, borderwidth=bdwith)
 stop_btn = Button(root, image=stop_img, borderwidth=bdwith)
+openFile_btn = Button(root, text="Open File", borderwidth=5, font=fontPrincipal, bg="blue", fg="white")
 
 incrementX_ddm = OptionMenu(root, incrementX_var, *incrementXY_list)
 incrementX_ddm.config(bd=5, font=fontSecondaire, width=12)
@@ -152,6 +154,8 @@ overwrite_lbl.place(x=525, y=400)
 overwrite1_lbl.place(x=700, y=300)
 arrowUp_btn.place(x=750, y=350)
 arrowDown_btn.place(x=750, y=415)
+
+openFile_btn.place(x=525, y=500)
 
 # eStop_btn.place(x=900, y=525)
 
