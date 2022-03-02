@@ -6,21 +6,75 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>985</width>
+    <height>506</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="Z_down">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>80</y>
-      <width>141</width>
-      <height>161</height>
+      <x>430</x>
+      <y>240</y>
+      <width>90</width>
+      <height>150</height>
+     </rect>
+    </property>
+    <property name="mouseTracking">
+     <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">image: url(:/images/assets/down_Z_arrow.png);
+background-color: transparent;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Z_up">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>0</y>
+      <width>90</width>
+      <height>150</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">image: url(:/images/assets/up_Z_arrow.png);
+background-color: transparent;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="X_up">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>0</y>
+      <width>90</width>
+      <height>150</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">image: url(:/images/assets/up_X_arrow.png);
+background-color: transparent;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="X_down">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>240</y>
+      <width>90</width>
+      <height>150</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -28,7 +82,410 @@
 background-color: transparent;</string>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Y_up">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>150</y>
+      <width>150</width>
+      <height>90</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">image: url(:/images/assets/up_Y_arrow.png);
+background-color: transparent;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Y_down">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>150</y>
+      <width>150</width>
+      <height>90</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">image: url(:/images/assets/down_Y_arrow.png);
+background-color: transparent;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="home">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>150</y>
+      <width>90</width>
+      <height>90</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">image: url(:/images/assets/home_button.png);
+border-width: 2px;
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="mesh">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>150</y>
+      <width>90</width>
+      <height>90</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">image: url(:/images/assets/mesh_button.png);
+background-color: transparent;
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="play">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>710</y>
+      <width>90</width>
+      <height>90</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">image: url(:/images/assets/play_button.png);
+background-color: transparent;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pause">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>710</y>
+      <width>90</width>
+      <height>90</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">image: url(:/images/assets/pause_button.png);
+background-color: transparent;
+border-color: rgb(0, 0, 0);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="stop">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>710</y>
+      <width>90</width>
+      <height>90</height>
+     </rect>
+    </property>
+    <property name="mouseTracking">
+     <bool>true</bool>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::ClickFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">image: url(:/images/assets/stop_button.png);
+background-color: transparent;
+border-color: rgb(255, 0, 255);
+border-width: 2px;
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QScrollArea" name="scrollArea">
+    <property name="geometry">
+     <rect>
+      <x>1070</x>
+      <y>0</y>
+      <width>281</width>
+      <height>511</height>
+     </rect>
+    </property>
+    <property name="widgetResizable">
+     <bool>true</bool>
+    </property>
+    <widget class="QWidget" name="scrollAreaWidgetContents">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>279</width>
+       <height>509</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="IncX">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>450</y>
+      <width>211</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>24</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Incréments X :</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Incy">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>500</y>
+      <width>211</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>24</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Incréments Y :</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="IncZ">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>550</y>
+      <width>211</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>24</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Incréments Z :</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="IncX_choix">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>455</y>
+      <width>71</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>...</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="IncZ_choix">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>555</y>
+      <width>71</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>...</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="IncY_choix">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>505</y>
+      <width>71</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>...</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Mode_man">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>620</y>
+      <width>135</width>
+      <height>76</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">image: url(:/images/assets/mode_manuel.png);
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Mode_auto">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>620</y>
+      <width>135</width>
+      <height>76</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">image: url(:/images/assets/mode_auto.png);
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Mode_single">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>620</y>
+      <width>135</width>
+      <height>76</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">image: url(:/images/assets/mode_cycle.png);
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QProgressBar" name="progressBar">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>710</y>
+      <width>250</width>
+      <height>45</height>
+     </rect>
+    </property>
+    <property name="value">
+     <number>24</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="machine_Status">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>0</y>
+      <width>291</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>30</pointsize>
+      <bold>true</bold>
+      <underline>true</underline>
+     </font>
+    </property>
+    <property name="text">
+     <string>Machine Status</string>
+    </property>
+   </widget>
+   <widget class="QTableView" name="table_Status">
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>70</y>
+      <width>256</width>
+      <height>192</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTableView" name="table_speeds">
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>380</y>
+      <width>256</width>
+      <height>192</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Speeds">
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>330</y>
+      <width>111</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>24</pointsize>
+      <bold>true</bold>
+      <underline>true</underline>
+     </font>
+    </property>
+    <property name="text">
+     <string>Speeds</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="OpenFile">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>610</y>
+      <width>150</width>
+      <height>90</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">image: url(:/assets/ouvrir_fichier_boutton.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="e_Stop">
+    <property name="geometry">
+     <rect>
+      <x>1170</x>
+      <y>640</y>
+      <width>181</width>
+      <height>181</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">image: url(:/images/assets/e-stop.png);</string>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>
@@ -37,12 +494,24 @@ background-color: transparent;</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>985</width>
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuMenu">
+    <property name="title">
+     <string>Menu</string>
+    </property>
+    <addaction name="actionConnection"/>
+   </widget>
+   <addaction name="menuMenu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionConnection">
+   <property name="text">
+    <string>Connection</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

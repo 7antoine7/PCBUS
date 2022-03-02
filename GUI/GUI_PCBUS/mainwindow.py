@@ -11,10 +11,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         super(MainWindow, self).__init__()
         self.setupUi(self)
         self.setWindowTitle("Super PCBUS CNC MASTER CONFIGURATOR 9000")
-        self.pushButton.clicked.connect(self.change_text)
 
-    def change_text(self):
-        self.pushButton.setText("fuck you")
 
 
 app = QtWidgets.QApplication(sys.argv)

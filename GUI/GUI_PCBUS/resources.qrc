@@ -19,4 +19,7 @@
         <file>assets/up_Y_arrow.png</file>
         <file>assets/up_Z_arrow.png</file>
     </qresource>
+    <qresource prefix="/">
+        <file>../../assets/ouvrir_fichier_boutton.png</file>
+    </qresource>
 </RCC>

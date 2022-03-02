@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 6.0.2, 2022-03-02T15:56:19. -->
+<!-- Written by QtCreator 6.0.2, 2022-03-02T11:27:51. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
-  <value type="QByteArray">{9e6fde45-ec73-4a36-b1de-22a162a979d1}</value>
+  <value type="QByteArray">{d059dc7c-8073-42d0-b5e6-fff32c32a780}</value>
  </data>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
@@ -79,7 +79,7 @@
     <value type="bool" key="ClangTools.AnalyzeOpenFiles">true</value>
     <value type="bool" key="ClangTools.BuildBeforeAnalysis">true</value>
     <value type="QString" key="ClangTools.DiagnosticConfig">Builtin.DefaultTidyAndClazy</value>
-    <value type="int" key="ClangTools.ParallelJobs">4</value>
+    <value type="int" key="ClangTools.ParallelJobs">6</value>
     <valuelist type="QVariantList" key="ClangTools.SelectedDirs"/>
     <valuelist type="QVariantList" key="ClangTools.SelectedFiles"/>
     <valuelist type="QVariantList" key="ClangTools.SuppressedDiagnostics"/>
@@ -132,16 +132,16 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">C:/Users/rbiss/Documents/Universite de Sherbrooke/Etudes/Session 4/Projet/PCBUS/GUI/GUI_PCBUS/mainwindow.py</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration.C:/Users/rbiss/Documents/Universite de Sherbrooke/Etudes/Session 4/Projet/PCBUS/GUI/GUI_PCBUS/mainwindow.py</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Users/rbiss/Documents/Universite de Sherbrooke/Etudes/Session 4/Projet/PCBUS/GUI/GUI_PCBUS/mainwindow.py</value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Interpreter">{ea2341ae-8d55-480a-96ce-738d8e6b87c6}</value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Script">C:\Users\rbiss\Documents\Universite de Sherbrooke\Etudes\Session 4\Projet\PCBUS\GUI\GUI_PCBUS\mainwindow.py</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">C:/Users/antoi/OneDrive - USherbrooke/S4/projet/code/PCBUS/GUI/GUI_PCBUS/mainwindow.py</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration.C:/Users/antoi/OneDrive - USherbrooke/S4/projet/code/PCBUS/GUI/GUI_PCBUS/mainwindow.py</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Users/antoi/OneDrive - USherbrooke/S4/projet/code/PCBUS/GUI/GUI_PCBUS/mainwindow.py</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Interpreter">{5eb1980f-46c1-4bf5-8e2b-d30b305a5f39}</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Script">C:\Users\antoi\OneDrive - USherbrooke\S4\projet\code\PCBUS\GUI\GUI_PCBUS\mainwindow.py</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">C:/Users/rbiss/Documents/Universite de Sherbrooke/Etudes/Session 4/Projet/PCBUS/GUI/GUI_PCBUS</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">C:/Users/antoi/OneDrive - USherbrooke/S4/projet/code/PCBUS/GUI/GUI_PCBUS</value>
    </valuemap>
    <value type="qlonglong" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>
