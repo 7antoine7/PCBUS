@@ -1,0 +1,22 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>assets/down_arrow.png</file>
+        <file>assets/down_X_arrow.png</file>
+        <file>assets/down_Y_arrow.png</file>
+        <file>assets/down_Z_arrow.png</file>
+        <file>assets/e-stop.png</file>
+        <file>assets/home_button.png</file>
+        <file>assets/logo_PCBUS.png</file>
+        <file>assets/mesh_button.png</file>
+        <file>assets/mode_auto.png</file>
+        <file>assets/mode_cycle.png</file>
+        <file>assets/mode_manuel.png</file>
+        <file>assets/pause_button.png</file>
+        <file>assets/play_button.png</file>
+        <file>assets/stop_button.png</file>
+        <file>assets/up_arrow.png</file>
+        <file>assets/up_X_arrow.png</file>
+        <file>assets/up_Y_arrow.png</file>
+        <file>assets/up_Z_arrow.png</file>
+    </qresource>
+</RCC>
