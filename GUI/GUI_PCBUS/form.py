@@ -17,15 +17,15 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
 from PySide6.QtWidgets import (QApplication, QHeaderView, QLabel, QMainWindow,
-    QMenu, QMenuBar, QProgressBar, QPushButton,
-    QScrollArea, QSizePolicy, QStatusBar, QTableView,
+    QMenu, QMenuBar, QPlainTextEdit, QProgressBar,
+    QPushButton, QSizePolicy, QStatusBar, QTableView,
     QToolButton, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(985, 506)
+        MainWindow.resize(1378, 864)
         self.actionConnection = QAction(MainWindow)
         self.actionConnection.setObjectName(u"actionConnection")
         self.centralwidget = QWidget(MainWindow)
@@ -94,14 +94,6 @@ class Ui_MainWindow(object):
 "border-color: rgb(255, 0, 255);\n"
 "border-width: 2px;\n"
 "")
-        self.scrollArea = QScrollArea(self.centralwidget)
-        self.scrollArea.setObjectName(u"scrollArea")
-        self.scrollArea.setGeometry(QRect(1070, 0, 281, 511))
-        self.scrollArea.setWidgetResizable(True)
-        self.scrollAreaWidgetContents = QWidget()
-        self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 279, 509))
-        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.IncX = QLabel(self.centralwidget)
         self.IncX.setObjectName(u"IncX")
         self.IncX.setGeometry(QRect(10, 450, 211, 31))
@@ -174,10 +166,13 @@ class Ui_MainWindow(object):
         self.e_Stop.setObjectName(u"e_Stop")
         self.e_Stop.setGeometry(QRect(1170, 640, 181, 181))
         self.e_Stop.setStyleSheet(u"image: url(:/images/assets/e-stop.png);")
+        self.gcodeView = QPlainTextEdit(self.centralwidget)
+        self.gcodeView.setObjectName(u"gcodeView")
+        self.gcodeView.setGeometry(QRect(1080, 0, 281, 511))
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 985, 21))
+        self.menubar.setGeometry(QRect(0, 0, 1378, 21))
         self.menuMenu = QMenu(self.menubar)
         self.menuMenu.setObjectName(u"menuMenu")
         MainWindow.setMenuBar(self.menubar)

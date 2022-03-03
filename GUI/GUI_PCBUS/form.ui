@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>985</width>
-    <height>506</height>
+    <width>1378</width>
+    <height>864</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -215,29 +215,6 @@ border-width: 2px;
     <property name="text">
      <string/>
     </property>
-   </widget>
-   <widget class="QScrollArea" name="scrollArea">
-    <property name="geometry">
-     <rect>
-      <x>1070</x>
-      <y>0</y>
-      <width>281</width>
-      <height>511</height>
-     </rect>
-    </property>
-    <property name="widgetResizable">
-     <bool>true</bool>
-    </property>
-    <widget class="QWidget" name="scrollAreaWidgetContents">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>279</width>
-       <height>509</height>
-      </rect>
-     </property>
-    </widget>
    </widget>
    <widget class="QLabel" name="IncX">
     <property name="geometry">
@@ -488,13 +465,23 @@ border-width: 2px;
      <string/>
     </property>
    </widget>
+   <widget class="QPlainTextEdit" name="gcodeView">
+    <property name="geometry">
+     <rect>
+      <x>1080</x>
+      <y>0</y>
+      <width>281</width>
+      <height>511</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>985</width>
+     <width>1378</width>
      <height>21</height>
     </rect>
    </property>
