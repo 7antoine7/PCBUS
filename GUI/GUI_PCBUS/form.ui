@@ -384,7 +384,7 @@ border-width: 2px;
      <string>Speeds</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="OpenFile">
+   <widget class="QPushButton" name="openFile">
     <property name="geometry">
      <rect>
       <x>580</x>

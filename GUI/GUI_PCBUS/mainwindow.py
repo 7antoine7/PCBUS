@@ -32,6 +32,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.Z_down.clicked.connect(self.moveZDown)
         self.home.clicked.connect(self.homeXY)
         self.mesh.clicked.connect(self.meshZ)
+        self.openFile.clicked.connect(self.readFile)
 
     #pt pas la meilleure solution, modifiable quand la fenetre run.
     def creatingTableStatus(self):
@@ -81,6 +82,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def meshZ(self):
         self.sendCommand("G30")
+
+    def readFile(self):
+        filename = QFileDialog.getOpenFileName()
+        path = filename[0]
+
+        file = open(str(path))
+        print(file.read())
 
     def sendCommand(self, command):
         self.gcodeView.appendPlainText(command)
