@@ -13,9 +13,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.setWindowTitle("Super PCBUS CNC MASTER CONFIGURATOR 9000")
 
+        self.commandesFichier = []
+
         self.gcodeView.setReadOnly(True)
 
-        self.creatingTableStatus()
+       # self.creatingTableStatus()
 
         #Il faudrait trouver une meilleure facon, car pour l'instant le Z
         #va de 0 a 10 et puis je ne sais pas comment mettre les unites.
@@ -88,7 +90,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         path = filename[0]
 
         file = open(str(path))
-        print(file.read())
+        self.commandesFichier = file.readlines()
 
     def sendCommand(self, command):
         self.gcodeView.appendPlainText(command)
@@ -96,7 +98,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 app = QtWidgets.QApplication(sys.argv)
 
 window = MainWindow()
-
 
 window.show()
 app.exec_()
