@@ -334,7 +334,7 @@ border-width: 2px;
      <number>24</number>
     </property>
    </widget>
-   <widget class="QLabel" name="machine_Status">
+   <widget class="QLabel" name="machineStatus">
     <property name="geometry">
      <rect>
       <x>590</x>
@@ -1139,14 +1139,39 @@ border-width: 2px;
     <property name="title">
      <string>Menu</string>
     </property>
-    <addaction name="actionConnection"/>
+    <widget class="QMenu" name="menuConnection">
+     <property name="title">
+      <string>Connection</string>
+     </property>
+     <widget class="QMenu" name="menuPort_S_rie">
+      <property name="title">
+       <string>Port Série</string>
+      </property>
+      <addaction name="separator"/>
+     </widget>
+     <addaction name="menuPort_S_rie"/>
+     <addaction name="actionConnect"/>
+     <addaction name="actionDisconnect"/>
+     <addaction name="actionRefresh"/>
+    </widget>
+    <addaction name="menuConnection"/>
    </widget>
    <addaction name="menuMenu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionConnection">
+  <action name="actionConnect">
    <property name="text">
-    <string>Connection</string>
+    <string>Connect</string>
+   </property>
+  </action>
+  <action name="actionDisconnect">
+   <property name="text">
+    <string>Disconnect</string>
+   </property>
+  </action>
+  <action name="actionRefresh">
+   <property name="text">
+    <string>Refresh Ports Séries</string>
    </property>
   </action>
  </widget>
