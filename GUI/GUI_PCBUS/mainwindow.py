@@ -6,6 +6,9 @@ from PySide6.QtWidgets import *
 from form import Ui_MainWindow
 import resources
 
+import serial
+import serial.tools.list_ports
+
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -17,7 +20,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.gcodeView.setReadOnly(True)
 
-       # self.creatingTableStatus()
+      # self.creatingTableStatus()
 
         #Il faudrait trouver une meilleure facon, car pour l'instant le Z
         #va de 0 a 10 et puis je ne sais pas comment mettre les unites.
@@ -35,6 +38,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.home.clicked.connect(self.homeXY)
         self.mesh.clicked.connect(self.meshZ)
         self.openFile.clicked.connect(self.readFile)
+
+        self.actionRefresh.triggered.connect(self.updatePorts)
+
 
     #pt pas la meilleure solution, modifiable quand la fenetre run.
     def creatingTableStatus(self):
@@ -94,6 +100,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def sendCommand(self, command):
         self.gcodeView.appendPlainText(command)
+
+    def updatePorts(self):
+        pass
+
+
+
 
 app = QtWidgets.QApplication(sys.argv)
 
