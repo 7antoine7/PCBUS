@@ -17,6 +17,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setWindowTitle("Super PCBUS CNC MASTER CONFIGURATOR 9000")
 
         self.commandesFichier = []
+        self.currentMode = None
 
         self.gcodeView.setReadOnly(True)
 
@@ -49,20 +50,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect(self.updateSerial)
         self.timer.start(100)  # every 10,000 milliseconds
-
-    # pt pas la meilleure solution, modifiable quand la fenetre run.
-
-    def creatingTableStatus(self):
-        self.tableStatus.setRowCount(4)
-        self.tableStatus.setColumnCount(3)
-
-        self.tableStatus.setItem(0, 1, QTableWidgetItem("Position"))
-        self.tableStatus.setItem(0, 2, QTableWidgetItem("Distance to Go"))
-        self.tableStatus.setItem(1, 0, QTableWidgetItem("X"))
-        self.tableStatus.setItem(2, 0, QTableWidgetItem("Y"))
-        self.tableStatus.setItem(3, 0, QTableWidgetItem("Z"))
-
-        self.tableStatus.showGrid()
 
     def moveXUp(self):
         # La distance viendrait des toolButton pour choisir les increments
