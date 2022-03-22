@@ -10,13 +10,16 @@ class serialCommunication:
         self.ser = serial.Serial()
         self.baudrate = 115200
         self.port = None
+        self.line = []
         pass
 
     def connect(self):
         try:
             self.ser.open()
+            print("conection")
             return 0
-        except:
+        except Exception as e:
+            print(str(e))
             return -1
 
     def disconnect(self):
@@ -28,9 +31,12 @@ class serialCommunication:
 
     def send(self, message):
         try:
-            self.ser.write(message)
+            message += '\r'
+            self.ser.write(message.encode('utf_8'))
+            print("send")
             return 0
-        except:
+        except Exception as e:
+            print(str(e))
             return -1
 
     def setPort(self, port):
@@ -38,13 +44,17 @@ class serialCommunication:
 
     def update(self):
         try:
-            byteSize = self.ser.in_waiting()
+            byteSize = self.ser.in_waiting
             if byteSize > 0:
-                return str(self.ser.read(1)) + str(self.ser.read(byteSize))
-            else:
-                return None
-        except:
-            return -1
+                for c in self.ser.read(byteSize):
+                    self.line.append(chr(c))
+                    if chr(c) == '\r':
+                        print("Line: " + ''.join(self.line))
+                        newline = ''.join(self.line)
+                        self.line = []
+                        return newline
+        except Exception as e:
+            print(str(e))
 
     def listPort(self):
         info = serial.tools.list_ports.comports()

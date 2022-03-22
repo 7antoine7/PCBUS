@@ -390,16 +390,6 @@ border-width: 2px;
      <string/>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="gcodeView">
-    <property name="geometry">
-     <rect>
-      <x>1080</x>
-      <y>0</y>
-      <width>281</width>
-      <height>501</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QSlider" name="IncXSld">
     <property name="geometry">
      <rect>
@@ -1140,6 +1130,16 @@ border-width: 2px;
     </property>
     <property name="text">
      <string>send</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="gcodeView">
+    <property name="geometry">
+     <rect>
+      <x>1070</x>
+      <y>20</y>
+      <width>291</width>
+      <height>491</height>
+     </rect>
     </property>
    </widget>
   </widget>
