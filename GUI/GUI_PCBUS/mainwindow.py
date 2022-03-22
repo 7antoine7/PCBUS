@@ -1,13 +1,12 @@
 import sys
 
-from PySide6 import QtGui, QtWidgets
+from PySide6 import QtGui, QtWidgets, QtCore
 from PySide6.QtWidgets import *
 
 from form import Ui_MainWindow
 import resources
 
-import serial
-import serial.tools.list_ports
+import serialCommunication
 
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
@@ -22,13 +21,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
       # self.creatingTableStatus()
 
-        #Il faudrait trouver une meilleure facon, car pour l'instant le Z
-        #va de 0 a 10 et puis je ne sais pas comment mettre les unites.
+        # Il faudrait trouver une meilleure facon, car pour l'instant le Z
+        # va de 0 a 10 et puis je ne sais pas comment mettre les unites.
         self.IncXSld.valueChanged.connect(self.valueIncX.setNum)
         self.IncYSld.valueChanged.connect(self.valueIncY.setNum)
         self.IncZSld.valueChanged.connect(self.valueIncZ.setNum)
 
-        #Assignation des bouttons aux fonctions
+        # Assignation des bouttons aux fonctions
         self.X_up.clicked.connect(self.moveXUp)
         self.X_down.clicked.connect(self.moveXDown)
         self.Y_up.clicked.connect(self.moveYUp)
@@ -39,10 +38,19 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.mesh.clicked.connect(self.meshZ)
         self.openFile.clicked.connect(self.readFile)
 
+        self.serial = serialCommunication.serialCommunication()
         self.actionRefresh.triggered.connect(self.updatePorts)
+        self.comportCombo.activated.connect(self.changePort)
+        self.actionConnect.triggered.connect(self.serial.connect)
+        self.actionDisconnect.triggered.connect(self.serial.disconnect)
+        self.sendButton.clicked.connect(self.sendSerial)
 
+        self.timer = QtCore.QTimer()
+        self.timer.timeout.connect(self.serial.update)
+        self.timer.start(100)  # every 10,000 milliseconds
 
-    #pt pas la meilleure solution, modifiable quand la fenetre run.
+    # pt pas la meilleure solution, modifiable quand la fenetre run.
+
     def creatingTableStatus(self):
         self.tableStatus.setRowCount(4)
         self.tableStatus.setColumnCount(3)
@@ -56,32 +64,32 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.tableStatus.showGrid()
 
     def moveXUp(self):
-        #La distance viendrait des toolButton pour choisir les increments
+        # La distance viendrait des toolButton pour choisir les increments
         distance = str(self.IncXSld.value())
         self.sendCommand("G1 X" + distance)
 
     def moveXDown(self):
-        #La distance viendrait des toolButton pour choisir les increments
+        # La distance viendrait des toolButton pour choisir les increments
         distance = str(-1*self.IncXSld.value())
         self.sendCommand("G1 X" + distance)
 
     def moveYUp(self):
-        #La distance viendrait des toolButton pour choisir les increments
+        # La distance viendrait des toolButton pour choisir les increments
         distance = str(self.IncYSld.value())
         self.sendCommand("G1 Y" + distance)
 
     def moveYDown(self):
-        #La distance viendrait des toolButton pour choisir les increments
+        # La distance viendrait des toolButton pour choisir les increments
         distance = str(-1*self.IncYSld.value())
         self.sendCommand("G1 Y" + distance)
 
     def moveZUp(self):
-        #La distance viendrait des toolButton pour choisir les increments
+        # La distance viendrait des toolButton pour choisir les increments
         distance = str(1*self.IncZSld.value())
         self.sendCommand("G1 Z" + distance)
 
     def moveZDown(self):
-        #La distance viendrait des toolButton pour choisir les increments
+        # La distance viendrait des toolButton pour choisir les increments
         distance = str(-1*self.IncZSld.value())
         self.sendCommand("G1 Z" + distance)
 
@@ -100,11 +108,17 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def sendCommand(self, command):
         self.gcodeView.appendPlainText(command)
+        self.serial.send(command)
 
     def updatePorts(self):
-        pass
+        self.comportCombo.addItems(self.serial.listPort())
 
+    def changePort(self):
+        self.serial.setPort(self.comportCombo.currentText())
 
+    def sendSerial(self):
+        text = self.lineEdit.text() + "\n"
+        self.sendCommand(text)
 
 
 app = QtWidgets.QApplication(sys.argv)

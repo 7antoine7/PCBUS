@@ -48,10 +48,10 @@ class serialCommunication:
 
     def listPort(self):
         info = serial.tools.list_ports.comports()
-        ports = [ports.device for ports in info]
+        ports = [str(ports.device) for ports in info]
         return ports
 
 
 if __name__ == "__main__":
-    test = serialComunication()
+    test = serialCommunication()
     print(test.listPort())
