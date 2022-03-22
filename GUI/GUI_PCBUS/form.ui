@@ -390,22 +390,6 @@ border-width: 2px;
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="e_Stop">
-    <property name="geometry">
-     <rect>
-      <x>1080</x>
-      <y>530</y>
-      <width>181</width>
-      <height>181</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">image: url(:/images/assets/e-stop.png);</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
    <widget class="QPlainTextEdit" name="gcodeView">
     <property name="geometry">
      <rect>
@@ -1123,6 +1107,39 @@ border-width: 2px;
     </property>
     <property name="text">
      <string>0</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comportCombo">
+    <property name="geometry">
+     <rect>
+      <x>1080</x>
+      <y>560</y>
+      <width>121</width>
+      <height>24</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit">
+    <property name="geometry">
+     <rect>
+      <x>1080</x>
+      <y>520</y>
+      <width>281</width>
+      <height>24</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="sendButton">
+    <property name="geometry">
+     <rect>
+      <x>1280</x>
+      <y>560</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>send</string>
     </property>
    </widget>
   </widget>
