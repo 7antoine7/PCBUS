@@ -39,6 +39,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.mesh.clicked.connect(self.meshZ)
         self.openFile.clicked.connect(self.readFile)
 
+        self.modeAutoBtn.clicked.connect(self.modeAuto)
+        self.modeManBtn.clicked.connect(self.modeManuel)
+        self.modeSingleBtn.clicked.connect(self.modeSingle)
+
         self.serial = serialCommunication.serialCommunication()
         self.actionRefresh.triggered.connect(self.updatePorts)
         self.comportCombo.activated.connect(self.changePort)
@@ -50,35 +54,62 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.timer.timeout.connect(self.serial.update)
         self.timer.start(100)  # every 10,000 milliseconds
 
+    def modeAuto(self):
+        self.modeLabel.setText("Mode Actuel : AUTO")
+        self.currentMode = "Auto"
+        pass
+
+    def modeManuel(self):
+        self.modeLabel.setText("Mode Actuel : MANUEL")
+        self.currentMode = "Manuel"
+        pass
+
+    def modeSingle(self):
+        self.modeLabel.setText("Mode Actuel : SINGLE BLOCK")
+        self.currentMode = "Single"
+        pass
+
     def moveXUp(self):
-        # La distance viendrait des toolButton pour choisir les increments
-        distance = str(self.IncXSld.value())
-        self.sendCommand("G1 X" + distance)
+        if self.currentMode == "Manuel":
+            # La distance viendrait des sliders pour choisir les increments
+            distance = str(self.IncXSld.value())
+            self.sendCommand("G1 X" + distance)
+        pass
 
     def moveXDown(self):
-        # La distance viendrait des toolButton pour choisir les increments
-        distance = str(-1*self.IncXSld.value())
-        self.sendCommand("G1 X" + distance)
+        if self.currentMode == "Manuel":
+            # La distance viendrait des sliders pour choisir les increments
+            distance = str(-1*self.IncXSld.value())
+            self.sendCommand("G1 X" + distance)
+        pass
 
     def moveYUp(self):
-        # La distance viendrait des toolButton pour choisir les increments
-        distance = str(self.IncYSld.value())
-        self.sendCommand("G1 Y" + distance)
+        if self.currentMode == "Manuel":
+            # La distance viendrait des sliders pour choisir les increments
+            distance = str(self.IncYSld.value())
+            self.sendCommand("G1 Y" + distance)
+        pass
 
     def moveYDown(self):
-        # La distance viendrait des toolButton pour choisir les increments
-        distance = str(-1*self.IncYSld.value())
-        self.sendCommand("G1 Y" + distance)
+        if self.currentMode == "Manuel":
+            # La distance viendrait des sliders pour choisir les increments
+            distance = str(-1*self.IncYSld.value())
+            self.sendCommand("G1 Y" + distance)
+        pass
 
     def moveZUp(self):
-        # La distance viendrait des toolButton pour choisir les increments
-        distance = str(1*self.IncZSld.value())
-        self.sendCommand("G1 Z" + distance)
+        if self.currentMode == "Manuel":
+            # La distance viendrait des sliders pour choisir les increments
+            distance = str(1*self.IncZSld.value())
+            self.sendCommand("G1 Z" + distance)
+        pass
 
     def moveZDown(self):
-        # La distance viendrait des toolButton pour choisir les increments
-        distance = str(-1*self.IncZSld.value())
-        self.sendCommand("G1 Z" + distance)
+        if self.currentMode == "Manuel":
+            # La distance viendrait des sliders pour choisir les increments
+            distance = str(-1*self.IncZSld.value())
+            self.sendCommand("G1 Z" + distance)
+        pass
 
     def homeXY(self):
         self.sendCommand("G28 X0 Y0")
@@ -106,7 +137,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def sendSerial(self):
         text = self.lineEdit.text() + "\n"
         self.sendCommand(text)
-
 
 app = QtWidgets.QApplication(sys.argv)
 
