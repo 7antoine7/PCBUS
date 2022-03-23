@@ -1,4 +1,5 @@
 import sys
+from turtle import color
 
 from PySide6 import QtGui, QtWidgets, QtCore
 from PySide6.QtWidgets import *
@@ -51,7 +52,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.sendButton.clicked.connect(self.sendSerial)
 
         self.timer = QtCore.QTimer()
-        self.timer.timeout.connect(self.serial.update)
+        self.timer.timeout.connect(self.updateSerial)
         self.timer.start(100)  # every 10,000 milliseconds
 
     def modeAuto(self):
@@ -125,7 +126,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.commandesFichier = file.readlines()
 
     def sendCommand(self, command):
-        self.gcodeView.appendPlainText(command)
+        self.gcodeView.setTextColor(QtGui.QColor('#C33332'))
+        self.gcodeView.append(command)
         self.serial.send(command)
 
     def updatePorts(self):
@@ -135,8 +137,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.serial.setPort(self.comportCombo.currentText())
 
     def sendSerial(self):
-        text = self.lineEdit.text() + "\n"
+        text = self.lineEdit.text()
         self.sendCommand(text)
+
+    def updateSerial(self):
+        line = str(self.serial.update())
+        if line != "None":
+            self.gcodeView.setTextColor(QtGui.QColor('#4040AD'))
+            self.gcodeView.append(line)
+
 
 app = QtWidgets.QApplication(sys.argv)
 
