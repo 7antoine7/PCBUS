@@ -17,10 +17,9 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
 from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QFrame,
-    QLabel, QLineEdit, QMainWindow, QMenu,
-    QMenuBar, QPlainTextEdit, QProgressBar, QPushButton,
-    QSizePolicy, QSlider, QSpinBox, QStatusBar,
-    QWidget)
+    QLabel, QLineEdit, QMainWindow, QMenuBar,
+    QProgressBar, QPushButton, QSizePolicy, QSlider,
+    QSpinBox, QStatusBar, QTextEdit, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -152,9 +151,6 @@ class Ui_MainWindow(object):
         self.openFile.setObjectName(u"openFile")
         self.openFile.setGeometry(QRect(580, 590, 150, 90))
         self.openFile.setStyleSheet(u"image: url(:/assets/ouvrir_fichier_boutton.png);")
-        self.gcodeView = QPlainTextEdit(self.centralwidget)
-        self.gcodeView.setObjectName(u"gcodeView")
-        self.gcodeView.setGeometry(QRect(1080, 0, 281, 501))
         self.IncXSld = QSlider(self.centralwidget)
         self.IncXSld.setObjectName(u"IncXSld")
         self.IncXSld.setGeometry(QRect(220, 455, 171, 31))
@@ -345,35 +341,37 @@ class Ui_MainWindow(object):
         self.dtgY.setFont(font6)
         self.comportCombo = QComboBox(self.centralwidget)
         self.comportCombo.setObjectName(u"comportCombo")
-        self.comportCombo.setGeometry(QRect(1080, 540, 121, 24))
+        self.comportCombo.setGeometry(QRect(1070, 580, 121, 24))
         self.lineEdit = QLineEdit(self.centralwidget)
         self.lineEdit.setObjectName(u"lineEdit")
-        self.lineEdit.setGeometry(QRect(1080, 510, 281, 24))
+        self.lineEdit.setGeometry(QRect(1070, 520, 201, 24))
         self.sendButton = QPushButton(self.centralwidget)
         self.sendButton.setObjectName(u"sendButton")
-        self.sendButton.setGeometry(QRect(1280, 540, 80, 24))
+        self.sendButton.setGeometry(QRect(1280, 520, 80, 24))
         self.modeLabel = QLabel(self.centralwidget)
         self.modeLabel.setObjectName(u"modeLabel")
         self.modeLabel.setGeometry(QRect(590, 280, 451, 41))
         self.modeLabel.setFont(font)
+        self.gcodeView = QTextEdit(self.centralwidget)
+        self.gcodeView.setObjectName(u"gcodeView")
+        self.gcodeView.setGeometry(QRect(1070, 20, 291, 491))
+        self.refreshBtn = QPushButton(self.centralwidget)
+        self.refreshBtn.setObjectName(u"refreshBtn")
+        self.refreshBtn.setGeometry(QRect(1260, 550, 80, 24))
+        self.connectBtn = QPushButton(self.centralwidget)
+        self.connectBtn.setObjectName(u"connectBtn")
+        self.connectBtn.setGeometry(QRect(1070, 550, 80, 24))
+        self.disconnectBtn = QPushButton(self.centralwidget)
+        self.disconnectBtn.setObjectName(u"disconnectBtn")
+        self.disconnectBtn.setGeometry(QRect(1160, 550, 90, 24))
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 1378, 21))
-        self.menuMenu = QMenu(self.menubar)
-        self.menuMenu.setObjectName(u"menuMenu")
-        self.menuConnection = QMenu(self.menuMenu)
-        self.menuConnection.setObjectName(u"menuConnection")
+        self.menubar.setGeometry(QRect(0, 0, 1378, 25))
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
         MainWindow.setStatusBar(self.statusbar)
-
-        self.menubar.addAction(self.menuMenu.menuAction())
-        self.menuMenu.addAction(self.menuConnection.menuAction())
-        self.menuConnection.addAction(self.actionConnect)
-        self.menuConnection.addAction(self.actionDisconnect)
-        self.menuConnection.addAction(self.actionRefresh)
 
         self.retranslateUi(MainWindow)
 
@@ -433,7 +431,8 @@ class Ui_MainWindow(object):
         self.dtgY.setText(QCoreApplication.translate("MainWindow", u"0", None))
         self.sendButton.setText(QCoreApplication.translate("MainWindow", u"Send", None))
         self.modeLabel.setText(QCoreApplication.translate("MainWindow", u"Mode Actuel : ", None))
-        self.menuMenu.setTitle(QCoreApplication.translate("MainWindow", u"Menu", None))
-        self.menuConnection.setTitle(QCoreApplication.translate("MainWindow", u"Connection", None))
+        self.refreshBtn.setText(QCoreApplication.translate("MainWindow", u"Refresh", None))
+        self.connectBtn.setText(QCoreApplication.translate("MainWindow", u"Connect", None))
+        self.disconnectBtn.setText(QCoreApplication.translate("MainWindow", u"Disconnect", None))
     # retranslateUi
 

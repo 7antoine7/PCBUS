@@ -1102,8 +1102,8 @@ border-width: 2px;
    <widget class="QComboBox" name="comportCombo">
     <property name="geometry">
      <rect>
-      <x>1080</x>
-      <y>540</y>
+      <x>1070</x>
+      <y>580</y>
       <width>121</width>
       <height>24</height>
      </rect>
@@ -1112,9 +1112,9 @@ border-width: 2px;
    <widget class="QLineEdit" name="lineEdit">
     <property name="geometry">
      <rect>
-      <x>1080</x>
-      <y>510</y>
-      <width>281</width>
+      <x>1070</x>
+      <y>520</y>
+      <width>201</width>
       <height>24</height>
      </rect>
     </property>
@@ -1123,7 +1123,7 @@ border-width: 2px;
     <property name="geometry">
      <rect>
       <x>1280</x>
-      <y>540</y>
+      <y>520</y>
       <width>80</width>
       <height>24</height>
      </rect>
@@ -1160,6 +1160,45 @@ border-width: 2px;
      </rect>
     </property>
    </widget>
+   <widget class="QPushButton" name="refreshBtn">
+    <property name="geometry">
+     <rect>
+      <x>1260</x>
+      <y>550</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Refresh</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="connectBtn">
+    <property name="geometry">
+     <rect>
+      <x>1070</x>
+      <y>550</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Connect</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="disconnectBtn">
+    <property name="geometry">
+     <rect>
+      <x>1160</x>
+      <y>550</y>
+      <width>90</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Disconnect</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -1167,24 +1206,9 @@ border-width: 2px;
      <x>0</x>
      <y>0</y>
      <width>1378</width>
-     <height>21</height>
+     <height>25</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuMenu">
-    <property name="title">
-     <string>Menu</string>
-    </property>
-    <widget class="QMenu" name="menuConnection">
-     <property name="title">
-      <string>Connection</string>
-     </property>
-     <addaction name="actionConnect"/>
-     <addaction name="actionDisconnect"/>
-     <addaction name="actionRefresh"/>
-    </widget>
-    <addaction name="menuConnection"/>
-   </widget>
-   <addaction name="menuMenu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionConnect">

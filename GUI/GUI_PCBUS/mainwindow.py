@@ -45,10 +45,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.modeSingleBtn.clicked.connect(self.modeSingle)
 
         self.serial = serialCommunication.serialCommunication()
-        self.actionRefresh.triggered.connect(self.updatePorts)
+        self.refreshBtn.clicked.connect(self.updatePorts)
         self.comportCombo.activated.connect(self.changePort)
-        self.actionConnect.triggered.connect(self.serial.connect)
-        self.actionDisconnect.triggered.connect(self.serial.disconnect)
+        self.connectBtn.clicked.connect(self.serial.connect)
+        self.disconnectBtn.clicked.connect(self.serial.disconnect)
         self.sendButton.clicked.connect(self.sendSerial)
 
         self.timer = QtCore.QTimer()
