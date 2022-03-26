@@ -21,8 +21,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.gcodeView.setReadOnly(True)
 
-      # self.creatingTableStatus()
-
         # Il faudrait trouver une meilleure facon, car pour l'instant le Z
         # va de 0 a 10 et puis je ne sais pas comment mettre les unites.
         self.IncXSld.valueChanged.connect(self.valueIncX.setNum)
@@ -54,6 +52,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect(self.updateSerial)
         self.timer.start(100)  # every 10,000 milliseconds
+        self.updatePorts()
 
     def modeAuto(self):
         self.modeLabel.setText("Mode Actuel : AUTO")
@@ -74,7 +73,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         if self.currentMode == "Manuel":
             # La distance viendrait des sliders pour choisir les increments
             distance = str(self.IncXSld.value())
-            self.sendCommand("G1 X" + distance)
+            self.sendCommand("G1 X" + distance + " F100")
         pass
 
     def moveXDown(self):
@@ -141,10 +140,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.sendCommand(text)
 
     def updateSerial(self):
-        line = str(self.serial.update())
-        if line != "None":
+        lines = self.serial.update()
+        if lines is not None:
             self.gcodeView.setTextColor(QtGui.QColor('#4040AD'))
-            self.gcodeView.append(line)
+            for line in lines:
+                self.gcodeView.append(str(line))
 
 
 app = QtWidgets.QApplication(sys.argv)

@@ -3,13 +3,14 @@ from ast import Try
 from logging import exception
 import serial
 import serial.tools.list_ports
+import time
 
 
 class serialCommunication:
     def __init__(self):
-        self.ser = serial.Serial()
-        self.baudrate = 115200
-        self.port = None
+        self.ser = serial.Serial(timeout = 0)
+        self.ser.baudrate = 115200
+        self.ser.port = None
         self.line = []
         pass
 
@@ -17,6 +18,9 @@ class serialCommunication:
         try:
             self.ser.open()
             print("conection")
+            self.send("\r\n\r")
+            time.sleep(2)
+            self.ser.flushInput()
             return 0
         except Exception as e:
             print(str(e))
@@ -31,8 +35,8 @@ class serialCommunication:
 
     def send(self, message):
         try:
-            message += '\r'
-            self.ser.write(message.encode('utf_8'))
+            message += '\n'
+            self.ser.write(message.encode('ascii'))
             print("send")
             return 0
         except Exception as e:
@@ -45,14 +49,15 @@ class serialCommunication:
     def update(self):
         try:
             byteSize = self.ser.in_waiting
+            newlines = []
             if byteSize > 0:
                 for c in self.ser.read(byteSize):
                     self.line.append(chr(c))
                     if chr(c) == '\r':
                         print("Line: " + ''.join(self.line))
-                        newline = ''.join(self.line)
+                        newlines.append(''.join(self.line).strip())
                         self.line = []
-                        return newline
+                return newlines
         except Exception as e:
             print(str(e))
 
