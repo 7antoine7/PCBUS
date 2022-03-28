@@ -23,9 +23,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # Il faudrait trouver une meilleure facon, car pour l'instant le Z
         # va de 0 a 10 et puis je ne sais pas comment mettre les unites.
-        self.IncXSld.valueChanged.connect(self.valueIncX.setNum)
-        self.IncYSld.valueChanged.connect(self.valueIncY.setNum)
-        self.IncZSld.valueChanged.connect(self.valueIncZ.setNum)
+        self.IncXSld.valueChanged.connect(self.updateIncValues)
+        self.IncYSld.valueChanged.connect(self.updateIncValues)
+        self.IncZSld.valueChanged.connect(self.updateIncValues)
+        self.IncFeedSld.valueChanged.connect(self.updateIncValues)
+        self.IncSpeedSld.valueChanged.connect(self.updateIncValues)
 
         # Assignation des bouttons aux fonctions
         self.X_up.clicked.connect(self.moveXUp)
@@ -35,10 +37,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.Z_up.clicked.connect(self.moveZUp)
         self.Z_down.clicked.connect(self.moveZDown)
         self.home.clicked.connect(self.homeXY)
-        self.mesh.clicked.connect(self.meshZ)
         self.openFile.clicked.connect(self.readFile)
 
-        self.modeAutoBtn.clicked.connect(self.modeAuto)
         self.modeManBtn.clicked.connect(self.modeManuel)
         self.modeSingleBtn.clicked.connect(self.modeSingle)
 
@@ -54,10 +54,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.timer.start(100)  # every 10,000 milliseconds
         self.updatePorts()
 
-    def modeAuto(self):
-        self.modeLabel.setText("Mode Actuel : AUTO")
-        self.currentMode = "Auto"
-        pass
+    def updateIncValues(self):
+        self.valueIncX.setText(str(self.IncXSld.value()) + " mm")
+        self.valueIncY.setText(str(self.IncYSld.value()) + " mm")
+        self.valueIncZ.setText(str(self.IncZSld.value()/10) + " mm")
+        self.valueIncFeed.setText(str(self.IncFeedSld.value()) + " mm/min")
+        self.valueIncSpeed.setText(str(self.IncSpeedSld.value()) + " rpm")
 
     def modeManuel(self):
         self.modeLabel.setText("Mode Actuel : MANUEL")
@@ -73,49 +75,52 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         if self.currentMode == "Manuel":
             # La distance viendrait des sliders pour choisir les increments
             distance = str(self.IncXSld.value())
-            self.sendCommand("G1 X" + distance + " F100")
+            feed = str(self.IncFeedSlde.value())
+            self.sendCommand("G1 X" + distance + " F" + feed)
         pass
 
     def moveXDown(self):
         if self.currentMode == "Manuel":
             # La distance viendrait des sliders pour choisir les increments
             distance = str(-1*self.IncXSld.value())
-            self.sendCommand("G1 X" + distance)
+            feed = str(self.IncFeedSlde.value())
+            self.sendCommand("G1 X" + distance + " F" + feed)
         pass
 
     def moveYUp(self):
         if self.currentMode == "Manuel":
             # La distance viendrait des sliders pour choisir les increments
             distance = str(self.IncYSld.value())
-            self.sendCommand("G1 Y" + distance)
+            feed = str(self.IncFeedSlde.value())
+            self.sendCommand("G1 Y" + distance + " F" + feed)
         pass
 
     def moveYDown(self):
         if self.currentMode == "Manuel":
             # La distance viendrait des sliders pour choisir les increments
             distance = str(-1*self.IncYSld.value())
-            self.sendCommand("G1 Y" + distance)
+            feed = str(self.IncFeedSlde.value())
+            self.sendCommand("G1 Y" + distance + " F" + feed)
         pass
 
     def moveZUp(self):
         if self.currentMode == "Manuel":
             # La distance viendrait des sliders pour choisir les increments
             distance = str(1*self.IncZSld.value())
-            self.sendCommand("G1 Z" + distance)
+            feed = str(self.IncFeedSlde.value())
+            self.sendCommand("G1 Z" + distance + " F" + feed)
         pass
 
     def moveZDown(self):
         if self.currentMode == "Manuel":
             # La distance viendrait des sliders pour choisir les increments
             distance = str(-1*self.IncZSld.value())
-            self.sendCommand("G1 Z" + distance)
+            feed = str(self.IncFeedSlde.value())
+            self.sendCommand("G1 Z" + distance + " F" + feed)
         pass
 
     def homeXY(self):
         self.sendCommand("G28 X0 Y0")
-
-    def meshZ(self):
-        self.sendCommand("G30")
 
     def readFile(self):
         filename = QFileDialog.getOpenFileName()
