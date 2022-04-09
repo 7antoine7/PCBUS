@@ -19,9 +19,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.commandesFichier = []
         self.currentMode = None
+        self.currentState = None
 
         self.gcodeView.setReadOnly(True)
-
+    
         self.IncXSld.valueChanged.connect(self.updateIncValues)
         self.IncYSld.valueChanged.connect(self.updateIncValues)
         self.IncZSld.valueChanged.connect(self.updateIncValues)
@@ -40,6 +41,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.modeManBtn.clicked.connect(self.modeManuel)
         self.modeSingleBtn.clicked.connect(self.modeSingle)
+
+        self.play.clicked.connect(self.sendCommandSingle)
 
         self.serial = serialCommunication.serialCommunication()
         self.refreshBtn.clicked.connect(self.updatePorts)
@@ -133,6 +136,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.gcodeView.append(command)
         self.serial.send(command)
 
+    def sendCommandSingle(self):
+        if self.currentMode == "Single":
+            if self.currentState == "Idle":
+                self.sendCommand(self.commandesFichier.pop())
+            
+
     def updatePorts(self):
         self.comportCombo.addItems(self.serial.listPort())
 
@@ -153,6 +162,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                     r"<(?P<State>Idle|Run|Hold|Home|Alarm|Check|Door)(?:\|MPos:(?P<MX>-?[0-9\.]*),(?P<MY>-?[0-9\.]*),(?P<MZ>-?[0-9\.]*))?(?:\|WPos:(?P<WX>-?[0-9\.]*),(?P<WY>-?[0-9\.]*),(?P<WZ>-?[0-9\.]*))?(?:\|FS:(?P<F>[0-9\.]*),(?P<S>[0-9\.]*))?(?:\|WCO:(?P<WcoX>[0-9\.]*),(?P<WcoY>[0-9\.]*),(?P<WcoZ>[0-9\.]*))?(?:\|Buf:(?P<Buf>[0-9]*))?(?:\|RX:(?P<RX>[0-9]*))?(?:\|Ln:(?P<L>[0-9]*))?(?:\|Lim:(?P<Lim>[0-1]*))?(?:\|Ctl:(?:'Ctl'[0-1]*))?(?:\|Ov:(?P<OvX>[0-9\.]*),(?P<OvY>[0-9\.]*),(?P<OvZ>[0-9\.]*))?>", line, re.S)
                 if match:
                     dict = match.groupdict()
+                    self.currentState = dict["State"]
                     self.posX.setText(dict["MX"])
                     self.posY.setText(dict["MY"])
                     self.posZ.setText(dict["MZ"])

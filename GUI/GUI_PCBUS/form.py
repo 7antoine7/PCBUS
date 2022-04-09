@@ -17,9 +17,9 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
 from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QLabel,
-    QLineEdit, QMainWindow, QMenuBar, QProgressBar,
-    QPushButton, QSizePolicy, QSlider, QStatusBar,
-    QTextEdit, QWidget)
+    QLineEdit, QMainWindow, QMenuBar, QPushButton,
+    QSizePolicy, QSlider, QStatusBar, QTextEdit,
+    QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -116,10 +116,6 @@ class Ui_MainWindow(object):
         self.modeSingleBtn.setGeometry(QRect(730, 460, 135, 76))
         self.modeSingleBtn.setStyleSheet(u"image: url(:/images/assets/mode_cycle.png);\n"
 "")
-        self.progressBar = QProgressBar(self.centralwidget)
-        self.progressBar.setObjectName(u"progressBar")
-        self.progressBar.setGeometry(QRect(1160, 610, 201, 31))
-        self.progressBar.setValue(24)
         self.machineStatus = QLabel(self.centralwidget)
         self.machineStatus.setObjectName(u"machineStatus")
         self.machineStatus.setGeometry(QRect(590, 0, 291, 71))

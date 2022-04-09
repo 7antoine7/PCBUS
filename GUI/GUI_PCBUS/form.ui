@@ -286,19 +286,6 @@ border-width: 2px;
      <string/>
     </property>
    </widget>
-   <widget class="QProgressBar" name="progressBar">
-    <property name="geometry">
-     <rect>
-      <x>1160</x>
-      <y>610</y>
-      <width>201</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="value">
-     <number>24</number>
-    </property>
-   </widget>
    <widget class="QLabel" name="machineStatus">
     <property name="geometry">
      <rect>
