@@ -6,7 +6,7 @@ from PySide6.QtWidgets import *
 
 from form import Ui_MainWindow
 import resources
-
+import re
 import serialCommunication
 
 
@@ -149,7 +149,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         if lines is not None:
             self.gcodeView.setTextColor(QtGui.QColor('#4040AD'))
             for line in lines:
-                self.gcodeView.append(str(line))
+                match = re.match(
+                    "/<(?'State'Idle|Run|Hold|Home|Alarm|Check|Door)(?:\|MPos:(?'MX'[0-9\.]*),(?'MY'[0-9\.]*),(?'MZ'[0-9\.]*))?(?:\|FS:(?'FEED'[0-9\.]*),(?'SPEED'[0-9\.]*))?>/g", line, re.S)
+                if match:
+                    dict = match.groupdict()
+                    self.posX.setText(dict["MX"])
+                    self.posY.setText(dict["MY"])
+                    self.posZ.setText(dict["MZ"])
+
+                else:
+                    self.gcodeView.append(str(line))
 
 
 app = QtWidgets.QApplication(sys.argv)
