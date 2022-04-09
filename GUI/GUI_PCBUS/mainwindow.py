@@ -1,3 +1,4 @@
+from cgitb import text
 import sys
 from turtle import color
 
@@ -21,8 +22,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.gcodeView.setReadOnly(True)
 
-        # Il faudrait trouver une meilleure facon, car pour l'instant le Z
-        # va de 0 a 10 et puis je ne sais pas comment mettre les unites.
         self.IncXSld.valueChanged.connect(self.updateIncValues)
         self.IncYSld.valueChanged.connect(self.updateIncValues)
         self.IncZSld.valueChanged.connect(self.updateIncValues)
@@ -74,48 +73,48 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def moveXUp(self):
         if self.currentMode == "Manuel":
             # La distance viendrait des sliders pour choisir les increments
-            distance = str(self.IncXSld.value())
-            feed = str(self.IncFeedSlde.value())
+            distance = str(self.IncXSld.value() + float(self.posX.text()))
+            feed = str(self.IncFeedSld.value())
             self.sendCommand("G1 X" + distance + " F" + feed)
         pass
 
     def moveXDown(self):
         if self.currentMode == "Manuel":
             # La distance viendrait des sliders pour choisir les increments
-            distance = str(-1*self.IncXSld.value())
-            feed = str(self.IncFeedSlde.value())
+            distance = str(-1*self.IncXSld.value() + float(self.posX.text()))
+            feed = str(self.IncFeedSld.value())
             self.sendCommand("G1 X" + distance + " F" + feed)
         pass
 
     def moveYUp(self):
         if self.currentMode == "Manuel":
             # La distance viendrait des sliders pour choisir les increments
-            distance = str(self.IncYSld.value())
-            feed = str(self.IncFeedSlde.value())
+            distance = str(self.IncYSld.value() + float(self.posY.text()))
+            feed = str(self.IncFeedSld.value())
             self.sendCommand("G1 Y" + distance + " F" + feed)
         pass
 
     def moveYDown(self):
         if self.currentMode == "Manuel":
             # La distance viendrait des sliders pour choisir les increments
-            distance = str(-1*self.IncYSld.value())
-            feed = str(self.IncFeedSlde.value())
+            distance = str(-1*self.IncYSld.value() + float(self.posY.text()))
+            feed = str(self.IncFeedSld.value())
             self.sendCommand("G1 Y" + distance + " F" + feed)
         pass
 
     def moveZUp(self):
         if self.currentMode == "Manuel":
             # La distance viendrait des sliders pour choisir les increments
-            distance = str(1*self.IncZSld.value())
-            feed = str(self.IncFeedSlde.value())
+            distance = str(1/10*self.IncZSld.value() + float(self.posZ.text()))
+            feed = str(self.IncFeedSld.value())
             self.sendCommand("G1 Z" + distance + " F" + feed)
         pass
 
     def moveZDown(self):
         if self.currentMode == "Manuel":
             # La distance viendrait des sliders pour choisir les increments
-            distance = str(-1*self.IncZSld.value())
-            feed = str(self.IncFeedSlde.value())
+            distance = str(-1/10*self.IncZSld.value() + float(self.posZ.text()))
+            feed = str(self.IncFeedSld.value())
             self.sendCommand("G1 Z" + distance + " F" + feed)
         pass
 
@@ -145,18 +144,22 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.sendCommand(text)
 
     def updateSerial(self):
+        self.serial.send("?")
         lines = self.serial.update()
         if lines is not None:
             self.gcodeView.setTextColor(QtGui.QColor('#4040AD'))
             for line in lines:
                 match = re.match(
-                    "/<(?'State'Idle|Run|Hold|Home|Alarm|Check|Door)(?:\|MPos:(?'MX'[0-9\.]*),(?'MY'[0-9\.]*),(?'MZ'[0-9\.]*))?(?:\|FS:(?'FEED'[0-9\.]*),(?'SPEED'[0-9\.]*))?>/g", line, re.S)
+                    r"<(?P<State>Idle|Run|Hold|Home|Alarm|Check|Door)(?:\|MPos:(?P<MX>-?[0-9\.]*),(?P<MY>-?[0-9\.]*),(?P<MZ>-?[0-9\.]*))?(?:\|WPos:(?P<WX>-?[0-9\.]*),(?P<WY>-?[0-9\.]*),(?P<WZ>-?[0-9\.]*))?(?:\|FS:(?P<F>[0-9\.]*),(?P<S>[0-9\.]*))?(?:\|WCO:(?P<WcoX>[0-9\.]*),(?P<WcoY>[0-9\.]*),(?P<WcoZ>[0-9\.]*))?(?:\|Buf:(?P<Buf>[0-9]*))?(?:\|RX:(?P<RX>[0-9]*))?(?:\|Ln:(?P<L>[0-9]*))?(?:\|Lim:(?P<Lim>[0-1]*))?(?:\|Ctl:(?:'Ctl'[0-1]*))?(?:\|Ov:(?P<OvX>[0-9\.]*),(?P<OvY>[0-9\.]*),(?P<OvZ>[0-9\.]*))?>", line, re.S)
                 if match:
                     dict = match.groupdict()
                     self.posX.setText(dict["MX"])
                     self.posY.setText(dict["MY"])
                     self.posZ.setText(dict["MZ"])
-
+                    self.spindleSpeed.setText(dict["S"] + " rpm")
+                    self.feedSpeed.setText(dict["F"] + " mm/min")
+                elif line == "ok":
+                    pass
                 else:
                     self.gcodeView.append(str(line))
 
