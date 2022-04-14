@@ -23,7 +23,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.currentState = None
 
         self.gcodeView.setReadOnly(True)
-        self.listGcode.setAttribute(QtCore.Qt.WA_TransparentForMouseEvents)
+        # self.listGcode.setAttribute(QtCore.Qt.WA_TransparentForMouseEvents)
+        self.listGcode.setEditTriggers(QAbstractItemView.NoEditTriggers)
 
         self.IncXSld.valueChanged.connect(self.updateIncValues)
         self.IncYSld.valueChanged.connect(self.updateIncValues)
@@ -66,7 +67,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.valueIncY.setText(str(self.IncYSld.value()) + " mm")
         self.valueIncZ.setText(str(self.IncZSld.value()/10) + " mm")
         self.valueIncFeed.setText(str(self.IncFeedSld.value()) + " mm/min")
-        self.valueIncSpeed.setText(str(self.IncSpeedSld.value()) + " rpm")
+        self.valueIncSpeed.setText(str(self.IncSpeedSld.value()) + " %")
 
     def modeManuel(self):
         self.modeLabel.setText("Mode Actuel : MANUEL")
@@ -79,45 +80,48 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def moveXUp(self):
         if self.currentMode == "Manuel":
             # La distance viendrait des sliders pour choisir les increments
-            distance = str(self.IncXSld.value() + float(self.posX.text()))
+            distance = str(self.IncXSld.value())  # + float(self.posX.text()))
             feed = str(self.IncFeedSld.value())
-            self.sendCommand("G01 X" + distance + " F" + feed)
+            self.sendCommand("$J=G21G91 X" + distance + " F" + feed)
 
     def moveXDown(self):
         if self.currentMode == "Manuel":
             # La distance viendrait des sliders pour choisir les increments
-            distance = str(-1*self.IncXSld.value() + float(self.posX.text()))
+            # + float(self.posX.text()))
+            distance = str(-1*self.IncXSld.value())
             feed = str(self.IncFeedSld.value())
-            self.sendCommand("G01 X" + distance + " F" + feed)
+            self.sendCommand("$J=G21G91 X" + distance + " F" + feed)
 
     def moveYUp(self):
         if self.currentMode == "Manuel":
             # La distance viendrait des sliders pour choisir les increments
-            distance = str(self.IncYSld.value() + float(self.posY.text()))
+            distance = str(self.IncYSld.value())  # + float(self.posY.text()))
             feed = str(self.IncFeedSld.value())
-            self.sendCommand("G01 Y" + distance + " F" + feed)
+            self.sendCommand("$J=G21G91 Y" + distance + " F" + feed)
 
     def moveYDown(self):
         if self.currentMode == "Manuel":
             # La distance viendrait des sliders pour choisir les increments
-            distance = str(-1*self.IncYSld.value() + float(self.posY.text()))
+            # + float(self.posY.text()))
+            distance = str(-1*self.IncYSld.value())
             feed = str(self.IncFeedSld.value())
-            self.sendCommand("G01 Y" + distance + " F" + feed)
+            self.sendCommand("$J=G21G91 Y" + distance + " F" + feed)
 
     def moveZUp(self):
         if self.currentMode == "Manuel":
             # La distance viendrait des sliders pour choisir les increments
-            distance = str(1/10*self.IncZSld.value() + float(self.posZ.text()))
+            # + float(self.posZ.text()))
+            distance = str(1/10*self.IncZSld.value())
             feed = str(self.IncFeedSld.value())
-            self.sendCommand("G01 Z" + distance + " F" + feed)
+            self.sendCommand("$J=G21G91 Z" + distance + " F" + feed)
 
     def moveZDown(self):
         if self.currentMode == "Manuel":
             # La distance viendrait des sliders pour choisir les increments
-            distance = str(-1/10*self.IncZSld.value() +
-                           float(self.posZ.text()))
+            # + float(self.posZ.text()))
+            distance = str(-1/10*self.IncZSld.value())
             feed = str(self.IncFeedSld.value())
-            self.sendCommand("G01 Z" + distance + " F" + feed)
+            self.sendCommand("$J=G21G91 Z" + distance + " F" + feed)
 
     def homeXY(self):
         self.sendCommand("$H")
@@ -145,8 +149,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def sendCommandSingle(self):
         if self.currentMode == "Single":
-            if self.currentState == "Idle":
+            if True:  # self.currentState == "Idle":
                 self.sendCommand(self.commandesFichier.pop(0))
+                self.currentRow += 1
+                self.listGcode.setCurrentRow(self.currentRow)
 
     def updatePorts(self):
         self.comportCombo.addItems(self.serial.listPort())
@@ -165,14 +171,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.gcodeView.setTextColor(QtGui.QColor('#4040AD'))
             for line in lines:
                 match = re.match(
-                    r"<(?P<State>Idle|Run|Hold|Home|Alarm|Check|Door)(?:\|MPos:(?P<MX>-?[0-9\.]*),(?P<MY>-?[0-9\.]*),(?P<MZ>-?[0-9\.]*))?(?:\|Bf:(?P<Buf>[0-9]*),(?P<Buf1>[0-9]*))?(?:\|WPos:(?P<WX>-?[0-9\.]*),(?P<WY>-?[0-9\.]*),(?P<WZ>-?[0-9\.]*))?(?:\|FS:(?P<F>[0-9\.]*),(?P<S>[0-9\.]*))?(?:\|WCO:(?P<WcoX>-?[0-9\.]*),(?P<WcoY>-?[0-9\.]*),(?P<WcoZ>-?[0-9\.]*))?(?:\|RX:(?P<RX>[0-9]*))?(?:\|Ln:(?P<L>[0-9]*))?(?:\|Lim:(?P<Lim>[0-1]*))?(?:\|Ctl:(?:'Ctl'[0-1]*))?(?:\|Ov:(?P<OvX>[0-9\.]*),(?P<OvY>[0-9\.]*),(?P<OvZ>[0-9\.]*))?(?:\|A:S)?>", line, re.S)
+                    r"<(?P<State>Idle|Run|Hold|Home|Alarm|Check|Door|Jog)(?:\|MPos:(?P<MX>-?[0-9\.]*),(?P<MY>-?[0-9\.]*),(?P<MZ>-?[0-9\.]*))?(?:\|Bf:(?P<Buf>[0-9]*),(?P<Buf1>[0-9]*))?(?:\|WPos:(?P<WX>-?[0-9\.]*),(?P<WY>-?[0-9\.]*),(?P<WZ>-?[0-9\.]*))?(?:\|FS:(?P<F>[0-9\.]*),(?P<S>[0-9\.]*))?(?:\|Pn:[X-Z]*)?(?:\|WCO:(?P<WcoX>-?[0-9\.]*),(?P<WcoY>-?[0-9\.]*),(?P<WcoZ>-?[0-9\.]*))?(?:\|RX:(?P<RX>[0-9]*))?(?:\|Ln:(?P<L>[0-9]*))?(?:\|Lim:(?P<Lim>[0-1]*))?(?:\|Ctl:(?:'Ctl'[0-1]*))?(?:\|Ov:(?P<OvX>[0-9\.]*),(?P<OvY>[0-9\.]*),(?P<OvZ>[0-9\.]*))?(?:\|A:S)?>", line, re.S)
                 if match:
                     dict = match.groupdict()
                     self.currentState = dict["State"]
                     self.posX.setText(dict["MX"])
                     self.posY.setText(dict["MY"])
                     self.posZ.setText(dict["MZ"])
-                    self.spindleSpeed.setText(dict["S"] + " rpm")
+                    self.spindleSpeed.setText(dict["S"] + " %")
                     self.feedSpeed.setText(dict["F"] + " mm/min")
                     self.stateLabel.setText("State : " + dict["State"])
                 elif line == "ok":
