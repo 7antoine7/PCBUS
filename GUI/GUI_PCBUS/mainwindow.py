@@ -16,13 +16,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         super(MainWindow, self).__init__()
         self.setupUi(self)
         self.setWindowTitle("Super PCBUS CNC MASTER CONFIGURATOR 9000")
+        self.currentRow = 0
 
         self.commandesFichier = []
         self.currentMode = None
         self.currentState = None
 
         self.gcodeView.setReadOnly(True)
-    
+        self.listGcode.setAttribute(QtCore.Qt.WA_TransparentForMouseEvents)
+
         self.IncXSld.valueChanged.connect(self.updateIncValues)
         self.IncYSld.valueChanged.connect(self.updateIncValues)
         self.IncZSld.valueChanged.connect(self.updateIncValues)
@@ -116,7 +118,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def moveZDown(self):
         if self.currentMode == "Manuel":
             # La distance viendrait des sliders pour choisir les increments
-            distance = str(-1/10*self.IncZSld.value() + float(self.posZ.text()))
+            distance = str(-1/10*self.IncZSld.value() +
+                           float(self.posZ.text()))
             feed = str(self.IncFeedSld.value())
             self.sendCommand("G1 Z" + distance + " F" + feed)
         pass
@@ -130,6 +133,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         file = open(str(path))
         self.commandesFichier = file.readlines()
+        self.listGcode.addItems(self.commandesFichier)
+        self.currentRow = 0
+        self.listGcode.setCurrentRow(self.currentRow)
 
     def sendCommand(self, command):
         self.gcodeView.setTextColor(QtGui.QColor('#C33332'))
@@ -140,7 +146,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         if self.currentMode == "Single":
             if self.currentState == "Idle":
                 self.sendCommand(self.commandesFichier.pop())
-            
 
     def updatePorts(self):
         self.comportCombo.addItems(self.serial.listPort())

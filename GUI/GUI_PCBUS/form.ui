@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1378</width>
+    <width>1518</width>
     <height>864</height>
    </rect>
   </property>
@@ -157,7 +157,7 @@ background-color: transparent;</string>
    <widget class="QPushButton" name="pause">
     <property name="geometry">
      <rect>
-      <x>740</x>
+      <x>710</x>
       <y>560</y>
       <width>90</width>
       <height>90</height>
@@ -175,8 +175,8 @@ border-color: rgb(0, 0, 0);</string>
    <widget class="QPushButton" name="stop">
     <property name="geometry">
      <rect>
-      <x>890</x>
-      <y>560</y>
+      <x>830</x>
+      <y>540</y>
       <width>90</width>
       <height>90</height>
      </rect>
@@ -291,7 +291,7 @@ border-width: 2px;
      <rect>
       <x>590</x>
       <y>0</y>
-      <width>291</width>
+      <width>361</width>
       <height>71</height>
      </rect>
     </property>
@@ -897,8 +897,8 @@ border-width: 2px;
    <widget class="QComboBox" name="comportCombo">
     <property name="geometry">
      <rect>
-      <x>1070</x>
-      <y>580</y>
+      <x>990</x>
+      <y>190</y>
       <width>121</width>
       <height>24</height>
      </rect>
@@ -907,8 +907,8 @@ border-width: 2px;
    <widget class="QLineEdit" name="lineEdit">
     <property name="geometry">
      <rect>
-      <x>1070</x>
-      <y>520</y>
+      <x>990</x>
+      <y>130</y>
       <width>201</width>
       <height>24</height>
      </rect>
@@ -917,8 +917,8 @@ border-width: 2px;
    <widget class="QPushButton" name="sendButton">
     <property name="geometry">
      <rect>
-      <x>1280</x>
-      <y>520</y>
+      <x>1200</x>
+      <y>130</y>
       <width>80</width>
       <height>24</height>
      </rect>
@@ -948,18 +948,18 @@ border-width: 2px;
    <widget class="QTextEdit" name="gcodeView">
     <property name="geometry">
      <rect>
-      <x>1070</x>
+      <x>990</x>
       <y>20</y>
       <width>291</width>
-      <height>491</height>
+      <height>101</height>
      </rect>
     </property>
    </widget>
    <widget class="QPushButton" name="refreshBtn">
     <property name="geometry">
      <rect>
-      <x>1260</x>
-      <y>550</y>
+      <x>1180</x>
+      <y>160</y>
       <width>80</width>
       <height>24</height>
      </rect>
@@ -971,8 +971,8 @@ border-width: 2px;
    <widget class="QPushButton" name="connectBtn">
     <property name="geometry">
      <rect>
-      <x>1070</x>
-      <y>550</y>
+      <x>990</x>
+      <y>160</y>
       <width>80</width>
       <height>24</height>
      </rect>
@@ -984,8 +984,8 @@ border-width: 2px;
    <widget class="QPushButton" name="disconnectBtn">
     <property name="geometry">
      <rect>
-      <x>1160</x>
-      <y>550</y>
+      <x>1080</x>
+      <y>160</y>
       <width>90</width>
       <height>24</height>
      </rect>
@@ -997,8 +997,8 @@ border-width: 2px;
    <widget class="QPushButton" name="openFile">
     <property name="geometry">
      <rect>
-      <x>1070</x>
-      <y>610</y>
+      <x>990</x>
+      <y>220</y>
       <width>81</width>
       <height>31</height>
      </rect>
@@ -1175,14 +1175,24 @@ border-width: 2px;
      <enum>QSlider::TicksBelow</enum>
     </property>
    </widget>
+   <widget class="QListWidget" name="listGcode">
+    <property name="geometry">
+     <rect>
+      <x>1130</x>
+      <y>220</y>
+      <width>256</width>
+      <height>451</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1378</width>
-     <height>21</height>
+     <width>1518</width>
+     <height>25</height>
     </rect>
    </property>
   </widget>
