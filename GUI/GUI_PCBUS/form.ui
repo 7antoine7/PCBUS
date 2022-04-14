@@ -291,7 +291,7 @@ border-width: 2px;
      <rect>
       <x>590</x>
       <y>0</y>
-      <width>291</width>
+      <width>371</width>
       <height>71</height>
      </rect>
     </property>
@@ -520,7 +520,7 @@ border-width: 2px;
      <rect>
       <x>590</x>
       <y>340</y>
-      <width>71</width>
+      <width>121</width>
       <height>27</height>
      </rect>
     </property>
@@ -538,7 +538,7 @@ border-width: 2px;
      <rect>
       <x>590</x>
       <y>370</y>
-      <width>51</width>
+      <width>101</width>
       <height>27</height>
      </rect>
     </property>
@@ -556,7 +556,7 @@ border-width: 2px;
      <rect>
       <x>730</x>
       <y>370</y>
-      <width>82</width>
+      <width>161</width>
       <height>27</height>
      </rect>
     </property>
@@ -584,7 +584,7 @@ border-width: 2px;
      </font>
     </property>
     <property name="text">
-     <string>0 rpm</string>
+     <string>0 %</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_12">
@@ -999,7 +999,7 @@ border-width: 2px;
      <rect>
       <x>1070</x>
       <y>610</y>
-      <width>81</width>
+      <width>101</width>
       <height>31</height>
      </rect>
     </property>
@@ -1017,7 +1017,7 @@ border-width: 2px;
      </rect>
     </property>
     <property name="text">
-     <string>18000</string>
+     <string>100</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_11">
@@ -1043,10 +1043,10 @@ border-width: 2px;
      </rect>
     </property>
     <property name="maximum">
-     <number>18000</number>
+     <number>100</number>
     </property>
     <property name="pageStep">
-     <number>1000</number>
+     <number>5</number>
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
@@ -1101,7 +1101,7 @@ border-width: 2px;
      </font>
     </property>
     <property name="text">
-     <string>0 rpm</string>
+     <string>0 %</string>
     </property>
    </widget>
    <widget class="QLabel" name="IncZ_2">
@@ -1150,7 +1150,7 @@ border-width: 2px;
      </rect>
     </property>
     <property name="text">
-     <string>900</string>
+     <string>200</string>
     </property>
    </widget>
    <widget class="QSlider" name="IncFeedSld">
@@ -1163,16 +1163,62 @@ border-width: 2px;
      </rect>
     </property>
     <property name="maximum">
-     <number>900</number>
+     <number>200</number>
     </property>
     <property name="pageStep">
-     <number>50</number>
+     <number>25</number>
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
     </property>
     <property name="tickPosition">
      <enum>QSlider::TicksBelow</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="stateLabel">
+    <property name="geometry">
+     <rect>
+      <x>800</x>
+      <y>70</y>
+      <width>211</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>24</pointsize>
+      <bold>true</bold>
+      <underline>true</underline>
+     </font>
+    </property>
+    <property name="text">
+     <string>State : </string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="startSpindle">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>700</y>
+      <width>131</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Start Spindle</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="stopSpindle">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>700</y>
+      <width>131</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Stop Spindle</string>
     </property>
    </widget>
   </widget>
@@ -1182,7 +1228,7 @@ border-width: 2px;
      <x>0</x>
      <y>0</y>
      <width>1378</width>
-     <height>21</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>

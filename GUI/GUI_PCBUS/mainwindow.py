@@ -51,6 +51,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.disconnectBtn.clicked.connect(self.serial.disconnect)
         self.sendButton.clicked.connect(self.sendSerial)
 
+        self.startSpindle.clicked.connect(self.spindleM3)
+        self.stopSpindle.clicked.connect(self.spindleM5)
+
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect(self.updateSerial)
         self.timer.start(100)  # every 10,000 milliseconds
@@ -66,64 +69,67 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def modeManuel(self):
         self.modeLabel.setText("Mode Actuel : MANUEL")
         self.currentMode = "Manuel"
-        pass
+
 
     def modeSingle(self):
         self.modeLabel.setText("Mode Actuel : SINGLE BLOCK")
         self.currentMode = "Single"
-        pass
+
 
     def moveXUp(self):
         if self.currentMode == "Manuel":
             # La distance viendrait des sliders pour choisir les increments
             distance = str(self.IncXSld.value() + float(self.posX.text()))
             feed = str(self.IncFeedSld.value())
-            self.sendCommand("G1 X" + distance + " F" + feed)
-        pass
+            self.sendCommand("G01 X" + distance + " F" + feed)
 
     def moveXDown(self):
         if self.currentMode == "Manuel":
             # La distance viendrait des sliders pour choisir les increments
             distance = str(-1*self.IncXSld.value() + float(self.posX.text()))
             feed = str(self.IncFeedSld.value())
-            self.sendCommand("G1 X" + distance + " F" + feed)
-        pass
+            self.sendCommand("G01 X" + distance + " F" + feed)
+
 
     def moveYUp(self):
         if self.currentMode == "Manuel":
             # La distance viendrait des sliders pour choisir les increments
             distance = str(self.IncYSld.value() + float(self.posY.text()))
             feed = str(self.IncFeedSld.value())
-            self.sendCommand("G1 Y" + distance + " F" + feed)
-        pass
+            self.sendCommand("G01 Y" + distance + " F" + feed)
+
 
     def moveYDown(self):
         if self.currentMode == "Manuel":
             # La distance viendrait des sliders pour choisir les increments
             distance = str(-1*self.IncYSld.value() + float(self.posY.text()))
             feed = str(self.IncFeedSld.value())
-            self.sendCommand("G1 Y" + distance + " F" + feed)
-        pass
+            self.sendCommand("G01 Y" + distance + " F" + feed)
+
 
     def moveZUp(self):
         if self.currentMode == "Manuel":
             # La distance viendrait des sliders pour choisir les increments
             distance = str(1/10*self.IncZSld.value() + float(self.posZ.text()))
             feed = str(self.IncFeedSld.value())
-            self.sendCommand("G1 Z" + distance + " F" + feed)
-        pass
+            self.sendCommand("G01 Z" + distance + " F" + feed)
 
     def moveZDown(self):
         if self.currentMode == "Manuel":
             # La distance viendrait des sliders pour choisir les increments
             distance = str(-1/10*self.IncZSld.value() + float(self.posZ.text()))
             feed = str(self.IncFeedSld.value())
-            self.sendCommand("G1 Z" + distance + " F" + feed)
-        pass
+            self.sendCommand("G01 Z" + distance + " F" + feed)
 
     def homeXY(self):
-        self.sendCommand("G28 X0 Y0")
+        self.sendCommand("$H")
 
+    def spindleM3(self):
+        self.sendCommand("S"+ str(self.IncSpeedSld.value()) + "M3")
+    
+    def spindleM5(self):
+        self.sendCommand("M5")
+        
     def readFile(self):
         filename = QFileDialog.getOpenFileName()
         path = filename[0]
@@ -139,9 +145,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def sendCommandSingle(self):
         if self.currentMode == "Single":
             if self.currentState == "Idle":
-                self.sendCommand(self.commandesFichier.pop())
+                self.sendCommand(self.commandesFichier.pop(0))
             
-
     def updatePorts(self):
         self.comportCombo.addItems(self.serial.listPort())
 
@@ -159,7 +164,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.gcodeView.setTextColor(QtGui.QColor('#4040AD'))
             for line in lines:
                 match = re.match(
-                    r"<(?P<State>Idle|Run|Hold|Home|Alarm|Check|Door)(?:\|MPos:(?P<MX>-?[0-9\.]*),(?P<MY>-?[0-9\.]*),(?P<MZ>-?[0-9\.]*))?(?:\|WPos:(?P<WX>-?[0-9\.]*),(?P<WY>-?[0-9\.]*),(?P<WZ>-?[0-9\.]*))?(?:\|FS:(?P<F>[0-9\.]*),(?P<S>[0-9\.]*))?(?:\|WCO:(?P<WcoX>[0-9\.]*),(?P<WcoY>[0-9\.]*),(?P<WcoZ>[0-9\.]*))?(?:\|Buf:(?P<Buf>[0-9]*))?(?:\|RX:(?P<RX>[0-9]*))?(?:\|Ln:(?P<L>[0-9]*))?(?:\|Lim:(?P<Lim>[0-1]*))?(?:\|Ctl:(?:'Ctl'[0-1]*))?(?:\|Ov:(?P<OvX>[0-9\.]*),(?P<OvY>[0-9\.]*),(?P<OvZ>[0-9\.]*))?>", line, re.S)
+                    r"<(?P<State>Idle|Run|Hold|Home|Alarm|Check|Door)(?:\|MPos:(?P<MX>-?[0-9\.]*),(?P<MY>-?[0-9\.]*),(?P<MZ>-?[0-9\.]*))?(?:\|Bf:(?P<Buf>[0-9]*),(?P<Buf1>[0-9]*))?(?:\|WPos:(?P<WX>-?[0-9\.]*),(?P<WY>-?[0-9\.]*),(?P<WZ>-?[0-9\.]*))?(?:\|FS:(?P<F>[0-9\.]*),(?P<S>[0-9\.]*))?(?:\|WCO:(?P<WcoX>-?[0-9\.]*),(?P<WcoY>-?[0-9\.]*),(?P<WcoZ>-?[0-9\.]*))?(?:\|RX:(?P<RX>[0-9]*))?(?:\|Ln:(?P<L>[0-9]*))?(?:\|Lim:(?P<Lim>[0-1]*))?(?:\|Ctl:(?:'Ctl'[0-1]*))?(?:\|Ov:(?P<OvX>[0-9\.]*),(?P<OvY>[0-9\.]*),(?P<OvZ>[0-9\.]*))?(?:\|A:S)?>", line, re.S)
                 if match:
                     dict = match.groupdict()
                     self.currentState = dict["State"]
@@ -168,6 +173,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                     self.posZ.setText(dict["MZ"])
                     self.spindleSpeed.setText(dict["S"] + " rpm")
                     self.feedSpeed.setText(dict["F"] + " mm/min")
+                    self.stateLabel.setText("State : " + dict["State"])
                 elif line == "ok":
                     pass
                 else:
