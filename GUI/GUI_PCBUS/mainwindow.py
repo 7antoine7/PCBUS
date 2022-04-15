@@ -155,6 +155,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 self.listGcode.setCurrentRow(self.currentRow)
 
     def updatePorts(self):
+        self.comportCombo.clear()
         self.comportCombo.addItems(self.serial.listPort())
 
     def changePort(self):
