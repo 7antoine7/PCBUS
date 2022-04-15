@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name "relay")(type "Legacy")(uri "${KIPRJMOD}/lib/Relay_Panasonic_ALF1T05/eec.lib")(options "")(descr ""))
+)

@@ -1,0 +1,4 @@
+(fp_lib_table
+  (lib (name "eec")(type "KiCad")(uri "${KIPRJMOD}/lib/Relay_Panasonic_ALF1T05/eec.pretty")(options "")(descr ""))
+  (lib (name "relais")(type "KiCad")(uri "${KIPRJMOD}/lib/Relay_Panasonic_ALF1T05/eec.pretty")(options "")(descr ""))
+)
